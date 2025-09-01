@@ -1,0 +1,31 @@
+name: Build and Upload Client ZIP
+
+on:
+  release:
+    types: [published]  # Triggers when a new release is published
+  push:
+    tags:
+      - '*'             # Also works if you push a tag like v1.0.0
+
+jobs:
+  build-zip:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build with Maven (skip tests)
+        run: mvn -B clean package -DskipTests
+
+
+      - name: Show files
+        run: |
+          ls -la assemblies/client/target
+#
+      - name: Upload ZIP to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: assemblies/client/target/hop-client*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
