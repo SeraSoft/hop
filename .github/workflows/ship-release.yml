@@ -18,11 +18,6 @@ jobs:
       - name: Build with Maven (skip tests)
         run: mvn -B clean package -DskipTests
 
-
-      - name: Show files
-        run: |
-          ls -la assemblies/client/target
-#
       - name: Upload ZIP to Release
         uses: softprops/action-gh-release@v1
         with:
