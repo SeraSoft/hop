@@ -102,7 +102,7 @@ public class AboutDialog extends Dialog {
     wLogo.setImage(
         SwtSvgImageUtil.getImageAsResource(display, "ui/images/logo_hop.svg")
             .getAsBitmapForSize(display, 100, 100));
-    wLogo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 3));
+    wLogo.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 1, 4));
 
     // Widget application name
     Label wName = new Label(composite, SWT.CENTER);
@@ -116,6 +116,11 @@ public class AboutDialog extends Dialog {
     wVersion.setText(this.getVersion());
     wVersion.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
     PropsUi.setLook(wVersion);
+
+    Text wDisclaimer = new Text(composite, SWT.READ_ONLY | SWT.CENTER);
+    wDisclaimer.setText(this.getDisclaimer());
+    wDisclaimer.setLayoutData(new GridData(SWT.CENTER, SWT.CENTER, true, false));
+    PropsUi.setLook(wDisclaimer);
 
     Link wLink = new Link(composite, SWT.WRAP | SWT.MULTI);
     wLink.setText("<a href=\"https://hop.apache.org\">hop.apache.org</a>");
@@ -169,7 +174,11 @@ public class AboutDialog extends Dialog {
 
   protected String getVersion() {
     HopVersionProvider versionProvider = new HopVersionProvider();
-    return versionProvider.getVersion()[0];
+    return versionProvider.getVersion()[0] + " LTS";
+  }
+
+  private String getDisclaimer() {
+    return BaseMessages.getString(PKG, "AboutDialog.Disclaimer");
   }
 
   private String getProperties() {
