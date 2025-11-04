@@ -18,3 +18,4 @@ Therefore, the underlying idea is to keep a few versions as LTS (Long Term Suppo
 - **[Issue 5660](https://github.com/apache/hop/issues/5660)**: [Feature] Merge diff "changed" fields enhancement. Please notice that features are not bound to be part of patch releases like this; however, since the [next bugfix](https://github.com/apache/hop/issues/5694) backport depends on the code in this commit, we need to bring this in.
 - **[Issue 5694](https://github.com/apache/hop/issues/5694)**: Merge rows transform has fields mixed up
 - **[Issue 5743](https://github.com/apache/hop/issues/5743)**: Auto save before execution does not work
+- **[Issue 5728](https://github.com/apache/hop/issues/5728)**: Add sequence copy-safe
