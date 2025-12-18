@@ -3,9 +3,9 @@ name: Build Artifacts
 on:
   push:
     branches: [ "support/*", "dev/*" ]
-    tags:
-      - 'v*'
-      - '*'
+#    tags:
+#      - 'v*'
+#      - '*'
 
 jobs:
   build:
