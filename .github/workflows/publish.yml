@@ -27,7 +27,7 @@ jobs:
 
 
       - name: Publish to GitHub Packages
-        run: mvn -B -X deploy -DskipTests --file lib/pom.xml
+        run: mvn -B -X deploy -DskipTests --file pom.xml
         env:
           GITHUB_ACTOR: xdelox
           GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
