@@ -4,7 +4,6 @@ on:
   push:
     branches: [ "support/*", "dev/*" ] # Detect pushes directly on the "main" branch
 
-
 jobs:
   build:
     name: "Build plugin and publish to repo"
