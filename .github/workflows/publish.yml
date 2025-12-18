@@ -2,7 +2,10 @@ name: Build Artifacts
 
 on:
   push:
-    branches: [ "support/*", "dev/*" ] # Detect pushes directly on the "main" branch
+    branches: [ "support/*", "dev/*" ]
+    tags:
+      - 'v*'
+      - '*'
 
 jobs:
   build:
@@ -21,29 +24,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
 
-      - name: Configure Maven settings
-        run: |
-          mkdir -p ~/.m2
-          cat > ~/.m2/settings.xml <<EOF
-          <settings>
-            <servers>
-              <server>
-                <id>github</id>
-                <username>\${{ github.actor }}</username>
-                <password>\${{ secrets.PERSONAL_ACCESS_TOKEN }}</password>
-              </server>
-            </servers>
-          </settings>
+      - name: Copy Maven settings
+        run: cp .m2/settings.xml ~/.m2/settings.xml
 
       - name: Publish to GitHub Packages
-        run: mvn -B -X deploy -DskipTests --file pom.xml
+        run: mvn -B deploy -DskipTests -Pgithub-deploy --file pom.xml
         env:
-          GITHUB_ACTOR: xdelox
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-
-
-
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
